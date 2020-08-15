@@ -1,0 +1,42 @@
+body {
+    font-family: 'Black Han Sans', sans-serif;
+    letter-spacing: 2px;
+    max-width: 375px;
+}
+
+.main-content {
+    background: lightgray;
+    height: 60vh;
+}
+
+.img-box{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 75%;
+    border-bottom: 1px solid black;
+    position: relative;
+}
+
+.place {
+    position: absolute;
+    top: 30%;
+    right: 8%;
+}
+
+.img-box img {
+    width: 100%;
+    height: 100%;
+}
+
+/* 현황판 신호 색깔 */
+.color-info {
+    display: flex;
+    justify-content: space-between;
+    margin: 1em auto 0 auto;
+    width: 70%;
+}
+
+.light {
+    font-weight: bold;
+}
