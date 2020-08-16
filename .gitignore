@@ -3,6 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=django,visualstudiocode,python
 
 .vscode/
+*.ipynb
 ### Django ###
 *.log
 *.pot

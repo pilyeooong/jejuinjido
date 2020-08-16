@@ -1,8 +1,17 @@
 body {
     font-family: 'Black Han Sans', sans-serif;
     letter-spacing: 2px;
-    /* max-width: 375px; */
+    max-width: 375px;
 }
+
+.text-bold {
+    font-weight: bold;
+}
+
+.text-mid {
+    font-size: 1.5em;
+}
+
 .red {
     color: red;
 }
@@ -23,9 +32,9 @@ body {
 .img-box{
     display: flex;
     justify-content: center;
+    /* background: dodgerblue; */
     width: 100%;
     height: 75%;
-    border-bottom: 1px solid black;
     position: relative;
 }
 
@@ -53,16 +62,29 @@ body {
 }
 
 .light {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
+.light-on {
+    margin-right: 3%;
+}
+
+.light-on-text {
+    font-size: 0.9em;
 }
 
 .modal-body-content {
     width: 100%;
+    height: 190px;
     display: flex;
 }
 
 .modal-image-box {
-    width: 50%;
+    width: 60%;
     height: 100%;
 }
 
@@ -72,9 +94,12 @@ body {
 }
 
 .modal-sticker-log {
-    width: 50%;
-    background: yellow;
-    margin-left: 1em;
+    width: 40%;
+    height: 100%;
+    margin-left: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
 }
 
 .modal-instagram {
@@ -91,4 +116,15 @@ body {
     margin: 1rem auto 0 auto;
     display: flex;
     justify-content: space-between;
+}
+
+.timeago {
+    color: gray;
+    font-size: 0.7em;
+    padding-top: 3%;
+    padding-left: 3%;
+}
+
+.current-status {
+    padding-left: 10%;
 }
