@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.core.validators import RegexValidator
 from collections import Counter
 
@@ -63,3 +64,17 @@ class Congestion(TimeStampedModel):
 
     def __str__(self):
         return f'{self.place.name} - {self.value}'
+
+    def time_since_created(self):
+        timesince = (timezone.now()-self.created_at).total_seconds()
+        minute = timesince // 60
+        hour = timesince // 3600
+
+        if timesince // 60 < 1:
+            return f'{int(timesince)}초 전'
+
+        elif minute and minute < 60:
+            return f'{int(minute)}분 전'
+
+        else:
+            return f'{int(hour)}시간 전'

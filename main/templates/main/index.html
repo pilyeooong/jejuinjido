@@ -37,9 +37,31 @@
             혼잡
         </div>
     </div>
+    <div class="congestion-log-title">
+        <span>최근 24시간 이내의 혼잡도 기록</span>
+    </div>
 </div>
-<div>
-    최근 24시간 이내의 혼잡도 기록이 표시됩니다
+<div class="congestion-log">
+    <div class="left-side">
+    {% for congestion in congestions %}
+        <div class="log">
+            <div class="congestion-place">{{ congestion.place }}에서 </div>
+            <div>
+                {% if congestion.value == 3 %}
+                <i class="text-mid red fas fa-circle"></i>
+                {% elif congestion.value == 2 %}
+                <i class="text-mid yellow fas fa-circle"></i>
+                {% else %}
+                <i class="text-mid green fas fa-circle"></i>
+                {% endif %}
+            </div>
+            <div class="log-timeago">{{ congestion.time_since_created }}</div>
+        </div>
+    {% endfor %}
+    </div>
+    <div class="right-side">
+    </div>
+    <div class="scroll-guide">스크롤 해보세요</div>
 </div>
 
 {% for place in places %}
@@ -48,7 +70,8 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header" style="align-items: center;">
-                <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold; font-size: 1.2em;">{{ place.name }}</h5>
+                <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold; font-size: 1.2em;">
+                    {{ place.name }}</h5>
                 {% if place.get_congestion_avg == 3 %}
                 <div class="current-status">
                     <i class="text-mid red fas fa-people-arrows"></i>
@@ -65,7 +88,7 @@
                     <span class="text-mid text-bold">쾌적</span>
                 </div>
                 {% endif %}
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left: -1em;">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -82,7 +105,7 @@
                                 <i class="fas fa-circle" style="color: red;"></i>
                                 <span class="light-on-text">켜짐</span>
                             </div>
-                            <span class="timeago">{{ congestion.created_at|timesince }} 전</span>
+                            <span class="timeago">{{ congestion.time_since_created }}</span>
                         </div>
                         {% elif congestion.value == 2 %}
                         <div class="light">
@@ -90,7 +113,7 @@
                                 <i class="fas fa-circle" style="color: yellow;"></i>
                                 <span class="light-on-text">켜짐</span>
                             </div>
-                            <span class="timeago">{{ congestion.created_at|timesince }} 전</span>
+                            <span class="timeago">{{ congestion.time_since_created }}</span>
                         </div>
                         {% else %}
                         <div class="light">
@@ -98,7 +121,7 @@
                                 <i class="fas fa-circle" style="color: green;"></i>
                                 <span class="light-on-text">켜짐</span>
                             </div>
-                            <span class="timeago">{{ congestion.created_at|timesince }} 전</span>
+                            <span class="timeago">{{ congestion.time_since_created }}</span>
                         </div>
                         {% endif %}
                         {% endfor %}
