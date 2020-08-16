@@ -12,6 +12,9 @@ body {
     font-size: 1.5em;
 }
 
+.white {
+    color: white;
+}
 .red {
     color: red;
 }
@@ -113,11 +116,21 @@ body {
     height: 200px;
 }
 
-.modal-sticker {
-    width: 80%;
-    margin: 1rem auto 0 auto;
+
+.modal-sticker-guide {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.modal-sticker {
+    width: 90%;
+    margin: 1rem auto 1rem auto;
+    display: flex;
+    justify-content: space-around;
 }
 
 .timeago {
