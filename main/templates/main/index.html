@@ -8,15 +8,25 @@
         <!-- <img src="{% static 'imgs/jejudo2.png' %}" alt=""> -->
         <img src="{% static 'imgs/new.png' %}" alt="">
         {% for place in places %}
-        <a style=" top: {{ place.lat }}%; right: {{ place.lng }};" href="#" type="button" data-toggle="modal" data-target="#exampleModal">
-                <i class="marker fas fa-map-marker"></i>
-            </a>
+        <a class="marker" style="top:{{ place.lat }}%; right: {{ place.lng }}%;" href="#" type="button"
+            data-toggle="modal" data-target="#exampleModal{{place.id}}">
+            {% if place.congestion == 1 %}
+            <i class="green fas fa-map-marker"></i>
+            {% elif place.congestion == 2 %}
+            <i class="yellow fas fa-map-marker"></i>
+            {% else %}
+            <i class="red fas fa-map-marker"></i>
+            {% endif %}
+        </a>
         {% endfor %}
+        <!-- <a class="marker" style="top: 65%; right: 50%" href="#" type="button" data-toggle="modal" data-target="#exampleModal">
+            <i class="green fas fa-map-marker"></i>
+        </a> -->
     </div>
     <div class="color-info">
         <div class="light red-light">
             <i class="fas fa-circle" style="color: green;"></i>
-            적정
+            쾌적
         </div>
         <div class="light yellow-light">
             <i class="fas fa-circle" style="color: yellow"></i>
@@ -30,18 +40,37 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="width: 100%">
+{% for place in places %}
+<div class="modal fade" id="exampleModal{{place.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" style="width: 100%">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">성산 일출봉</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{ place.name }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" style="padding: 0 1em 0 1em; margin-bottom: 1em;" >
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consectetur omnis totam eligendi quo tenetur,
-                placeat voluptatibus corrupti libero laborum enim.
+            <div class="modal-body" style="padding: 0 1em 0 1em; margin-bottom: 1em;">
+                <div class="modal-body-content">
+                    <div class="modal-image-box">
+                        <img src="http://localhost:8000/media/{{ place.image }}" alt="">
+                    </div>
+                    <div class="modal-sticker-log">
+                        신호등 로그
+                    </div>
+                </div>
+                <div class="modal-instagram">
+                    <i class="fab fa-instagram" style="font-weight: bold;"></i>INSTA
+                    <div class="hashtag">
+
+                    </div>
+                </div>
+                <div class="modal-sticker">
+                    <a href=""> <i class="fas fa-circle" style="color: green;"></i>쾌적</a>
+                    <a href=""> <i class="fas fa-circle" style="color: yellow;"></i>보통</a>
+                    <a href=""> <i class="fas fa-circle" style="color: red;"></i>혼잡</a>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -50,4 +79,5 @@
         </div>
     </div>
 </div>
+{% endfor %}
 {% endblock %}

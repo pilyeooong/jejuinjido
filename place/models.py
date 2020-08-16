@@ -28,9 +28,15 @@ class Place(TimeStampedModel):
     address = models.TextField()
     website = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=13, blank=True)
+    image = models.ImageField(upload_to='place/')
     lat = models.IntegerField()
     lng = models.IntegerField()
-    congestion = models.IntegerField()
+    congestion = models.IntegerField(default=1)
 
     def __str__(self):
         return self.name
+
+
+class Congestion(TimeStampedModel):
+    value = models.IntegerField()
+    place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='congestions')
