@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="detail-image">
+        <img src="http://localhost:8000/media/{{ place.image }}" alt="">
+    </div>
+    <div>
+        {{ place.name }}
+    </div>
+    <div>
+        {{ place.description }}
+    </div>
+    <div>
+        {{ place.address }}
+    </div>
+    <div>
+        {{ place.website }}
+    </div>
+
+
+{% endblock %}

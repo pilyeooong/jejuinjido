@@ -7,7 +7,9 @@ from .models import Congestion, Place
 
 
 def place_detail(request, placeId):
-    pass
+    place = get_object_or_404(Place, id=placeId)
+
+    return render(request, 'place/place_detail.html', {'place': place})
 
 
 def add_congestion(request, placeId, value):

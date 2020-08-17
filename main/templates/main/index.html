@@ -3,65 +3,85 @@
 {% load static %}
 
 {% block content %}
-<div class="main-content">
-    <div class="img-box">
-        <!-- <img src="{% static 'imgs/jejudo2.png' %}" alt=""> -->
-        <img src="{% static 'imgs/new.png' %}" alt="">
-        {% for place in places %}
-        <a class="marker" style="top:{{ place.lat }}%; right: {{ place.lng }}%;" href="#" type="button"
-            data-toggle="modal" data-target="#exampleModal{{place.id}}">
-            {% if place.get_congestion_avg == 3 %}
-            <i class="red fas fa-map-marker"></i>
-            {% elif place.get_congestion_avg == 2 %}
-            <i class="yellow fas fa-map-marker"></i>
-            {% else %}
-            <i class="green fas fa-map-marker"></i>
-            {% endif %}
-        </a>
-        {% endfor %}
-        <!-- <a class="marker" style="top: 65%; right: 50%" href="#" type="button" data-toggle="modal" data-target="#exampleModal">
+<div class="background-box">
+    <div class="main-content">
+        <div class="img-box">
+            <!-- <a href=""> <i class="text-smd halla fas fa-mountain"></i></a> -->
+            <div class="category-list">
+                {% for category in categories %}
+                <a class="category-item" href="{% url  'main:place_in_category' category %}">{{ category }}</a>
+                {% endfor %}
+            </div>
+            <img src="{% static 'imgs/new.png' %}" alt="">
+            {% for place in places %}
+            <a class="marker" style="top:{{ place.lat }}%; right: {{ place.lng }}%;" href="#" type="button"
+                data-toggle="modal" data-target="#exampleModal{{place.id}}">
+                {% if place.get_congestion_avg == 3 %}
+                {% if place.category.id == 1 %}
+                <i class="text-smd red fas fa-umbrella-beach"></i>
+                {% else %}
+                <i class="text-smd red fas fa-map-marker"></i>
+                {% endif %}
+                {% elif place.get_congestion_avg == 2 %}
+                {% if place.category.id == 1 %}
+                <i class="text-smd yellow fas fa-umbrella-beach"></i>
+                {% else %}
+                <i class="text-smd yellow fas fa-map-marker"></i>
+                {% endif %}
+                {% else %}
+                {% if place.category.id == 1 %}
+                <i class="text-smd green fas fa-umbrella-beach"></i>
+                {% else %}
+                <i class="text-smd green fas fa-map-marker"></i>
+                {% endif %}
+                {% endif %}
+                <p class="arrow-box">{{place.name}}</p>
+            </a>
+            {% endfor %}
+            <!-- <a class="marker" style="top: 65%; right: 50%" href="#" type="button" data-toggle="modal" data-target="#exampleModal">
             <i class="green fas fa-map-marker"></i>
         </a> -->
-    </div>
-    <div class="color-info">
-        <div class="light">
-            <i class="green fas fa-map-marker"></i>
-            쾌적
         </div>
-        <div class="light">
-            <i class="yellow fas fa-map-marker"></i>
-            보통
-        </div>
-        <div class="light">
-            <i class="red fas fa-map-marker"></i>
-            혼잡
-        </div>
-    </div>
-    <div class="congestion-log-title">
-        <span>최근 24시간 이내의 혼잡도 기록</span>
-    </div>
-</div>
-<div class="congestion-log">
-    <div class="left-side">
-        {% for congestion in congestions %}
-        <div class="log">
-            <div class="congestion-place">{{ congestion.place }}에서 </div>
-            <div>
-                {% if congestion.value == 3 %}
-                <i class="text-mid red fas fa-circle"></i>
-                {% elif congestion.value == 2 %}
-                <i class="text-mid yellow fas fa-circle"></i>
-                {% else %}
-                <i class="text-mid green fas fa-circle"></i>
-                {% endif %}
+        <div class="color-info">
+            <div class="light">
+                <i class="green fas fa-people-arrows"></i>
+                쾌적
             </div>
-            <div class="log-timeago">{{ congestion.time_since_created }}</div>
+            <div class="light">
+                <i class="yellow fas fa-people-arrows"></i>
+                보통
+            </div>
+            <div class="light">
+                <i class="red fas fa-people-arrows"></i>
+                혼잡
+            </div>
         </div>
-        {% endfor %}
+        <div class="congestion-log-title">
+            <span>최근 24시간 이내의 혼잡도 기록</span>
+        </div>
     </div>
-    <div class="right-side">
+    <div class="congestion-log">
+        <div class="left-side">
+            {% for congestion in congestions %}
+            <div class="log">
+                <div class="text-bold congestion-place">{{ congestion.place }}에서 </div>
+                <div>
+                    {% if congestion.value == 3 %}
+                    <i class="text-mid red fas fa-people-arrows"></i>
+                    {% elif congestion.value == 2 %}
+                    <i class="text-mid yellow fas fa-people-arrows"></i>
+                    {% else %}
+                    <i class="text-mid green fas fa-people-arrows"></i>
+                    {% endif %}
+                </div>
+                <div class="log-timeago">{{ congestion.time_since_created }}</div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="right-side">
+        </div>
+        <div class="scroll-guide">스크롤 해보세요</div>
     </div>
-    <div class="scroll-guide">스크롤 해보세요</div>
 </div>
 
 {% for place in places %}
@@ -143,14 +163,17 @@
                             style="color: yellow;"></i>보통</a>
                     <a href="{% url 'place:add-congestion' place.id 3 %}"><i class="fas fa-circle"
                             style="color: red;"></i>혼잡</a> -->
-                    <a class="btn btn-primary" style="" href="{% url 'place:add-congestion' place.id 1 %}">쾌적</a>
-                    <a class="btn btn-warning" href="{% url 'place:add-congestion' place.id 2 %}">보통</a>
-                    <a class="btn btn-danger" href="{% url 'place:add-congestion' place.id 3 %}">혼잡</a>
+                    <a style="font-size:0.8em" class="sticker btn btn-primary"
+                        href="{% url 'place:add-congestion' place.id 1 %}">쾌적했어요</a>
+                    <a style="font-size:0.8em; color: white;" class="btn btn-warning"
+                        href="{% url 'place:add-congestion' place.id 2 %}">보통이에요</a>
+                    <a style="font-size:0.8em" class="btn btn-danger"
+                        href="{% url 'place:add-congestion' place.id 3 %}">혼잡했어요</a>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">닫 기</button>
-                <a type="button" class="btn btn-secondary" style="color: white">상세 보기</a>
+                <a type="button" href="{% url 'place:place-detail' place.id %}"class="btn btn-secondary" style="color: white">상세 보기</a>
             </div>
         </div>
     </div>
