@@ -26,19 +26,19 @@ class Category(TimeStampedModel):
 class Place(TimeStampedModel):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='places')
     name = models.CharField(max_length=30)
-    description = models.TextField()
-    address = models.CharField(max_length=50)
-    website = models.CharField(max_length=50)
-    phone_number = models.CharField(max_length=13, blank=True)
-    image = models.ImageField(upload_to='place/')
+    description = models.TextField(null=True, blank=True)
+    address = models.CharField(null=True, blank=True, max_length=50)
+    website = models.CharField(null=True, blank=True, max_length=100)
+    phone_number = models.CharField(null=True, blank=True, max_length=13)
+    image = models.ImageField(null=True, blank=True, upload_to='place/')
     lat = models.FloatField()
     lng = models.FloatField()
     # 추가 부분
-    open_at = models.TimeField(null=True)
-    closed_at = models.TimeField(null=True)
-    fee = models.IntegerField(null=True)
-    weekend = models.CharField(max_length=30, null=True)
-    hashtag = models.CharField(max_length=30, null=True)
+    open_at = models.TimeField(null=True, blank=True)
+    closed_at = models.TimeField(null=True, blank=True)
+    fee = models.CharField(null=True, max_length=50, blank=True)
+    weekend = models.CharField(max_length=100, null=True, blank=True)
+    hashtag = models.CharField(max_length=100, null=True, blank=True)
 
     class Meta:
         ordering = ['-id']

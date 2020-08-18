@@ -109,6 +109,7 @@ body {
     border-radius: 5%;
     background: #333;
     opacity: 0.8;
+    z-index: 10;
 }
 
 .category-item {
@@ -142,7 +143,7 @@ body {
 .arrow-box {
     display: none;
     position: absolute;
-    width: 125px;
+    width: 100px;
     padding: 8px;
     left: 0;
     -webkit-border-radius: 8px;
@@ -170,7 +171,7 @@ body {
 }
 
 
-.marker i:hover+p.arrow-box {
+.marker i:hover+ span.arrow-box {
     display: block;
 }
 
@@ -277,7 +278,7 @@ body {
     display: flex;
     width: 90%;
     height: 160px;
-    overflow: scroll;
+    overflow-y: scroll;
     margin: 0 auto 1em auto;
     position: relative;
     padding-top: 5px;

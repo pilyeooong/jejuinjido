@@ -22,5 +22,7 @@ def place_in_category(request, category_name):
     category = get_object_or_404(Category, name=category_name)
     categories = Category.objects.all()
     places = Place.objects.filter(category=category)
+    congestions = Congestion.objects.all()
 
-    return render(request, 'main/index.html', {'places': places, 'categories': categories })
+    return render(request, 'main/index.html', {'places': places, 'categories': categories, 'congestions': congestions })
+
