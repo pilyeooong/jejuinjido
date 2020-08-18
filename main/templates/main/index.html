@@ -56,16 +56,16 @@
 
                 {% else %}
                 {% if place.category.id == 1 %}
-                <i class="text-smd green fas fa-umbrella-beach"></i>
+                <i class="text-smd green fas fa-umbrella-beach" style="z-index:1;"></i>
                 {% elif place.category.id == 2 %}
                 <i class="text-smd green fas fa-tree"></i>
                 {% elif place.category.id == 3 %}
-                <i class="text-smd green fas fa-vihara"></i>
+                <i class="text-smd green fas fa-vihara" style="z-index:1;"></i>
                 {% else %}
                 <i class="text-smd green fas fa-video"></i>
                 {% endif %}
                 {% endif %}
-                <span class="arrow-box">{{place.name}}</span>
+                <span class="arrow-box">{{place.name}}</p>
             </a>
             {% endfor %}
             <!-- <a class="marker" style="top: 65%; right: 50%" href="#" type="button" data-toggle="modal" data-target="#exampleModal">
@@ -179,7 +179,12 @@
                 <div class="modal-instagram">
                     <i class="fab fa-instagram" style="font-weight: bold;"></i> INSTAGRAM
                     <div class="hashtag">
-
+                        {% if place.id == 1 %}
+                        <div style="width: 100%; height: 100%; display: flex; justify-content: space-between;">
+                            <img style="width: 49%; height: 100%; " src="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/s1080x1080/117616134_1009518706175527_6562338811307973522_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_cat=107&_nc_ohc=SZ-GBPkKd7oAX-yK_g6&oh=2fb57a0875285f8e1598da81d2959b8b&oe=5F66D344" alt="">
+                            <img src="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/117860307_3260482127510954_2526734304414809276_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_cat=102&_nc_ohc=0kQYyHx7_2sAX_g0wFu&oh=088ba79793405af21dd103eae1569f66&oe=5F65D6ED" style="width:49%; height: 100%;" alt="">
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="modal-sticker-guide">

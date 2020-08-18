@@ -152,6 +152,7 @@ body {
     background: #333;
     color: #fff;
     font-size: 0.8em;
+    /* z-index: 10; */
 }
 
 .arrow_box:after {
@@ -227,6 +228,7 @@ body {
 
 .hashtag {
     border: 1px solid #000;
+    padding: 0.3em;
     height: 200px;
 }
 
