@@ -5,11 +5,27 @@
 {% block content %}
 <div class="background-box">
     <div class="main-content">
+        <svg class="editorial" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none">
+            <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g class="parallax">
+                <use xlink:href="#gentle-wave" x="50" y="0" fill="#4579e2" />
+                <use xlink:href="#gentle-wave" x="50" y="3" fill="#3461c1" />
+                <use xlink:href="#gentle-wave" x="50" y="6" fill="#2d55aa" />
+            </g>
+        </svg>
         <div class="img-box">
             <!-- <a href=""> <i class="text-smd halla fas fa-mountain"></i></a> -->
-            <div class="category-list">
+            <i class="text-mid category-menu menu-color fas fa-caret-square-down"></i>
+            <div class="category-list" style="display: none;">
+                <div>
+                    <a class="category-item" href="{% url 'main:index'%}">전체</a>
+                </div>
                 {% for category in categories %}
-                <a class="category-item" href="{% url  'main:place_in_category' category %}">{{ category }}</a>
+                <div>
+                    <a class="category-item" href="{% url  'main:place_in_category' category %}">{{ category }}</a>
+                </div>
                 {% endfor %}
             </div>
             <img src="{% static 'imgs/new.png' %}" alt="">
@@ -19,20 +35,34 @@
                 {% if place.get_congestion_avg == 3 %}
                 {% if place.category.id == 1 %}
                 <i class="text-smd red fas fa-umbrella-beach"></i>
+                {% elif place.category.id == 2 %}
+                <i class="text-smd red fas fa-tree"></i>
+                {% elif place.category.id == 3 %}
+                <i class="text-smd red fas fa-vihara"></i>
                 {% else %}
-                <i class="text-smd red fas fa-map-marker"></i>
+                <i class="text-smd red fas fa-video"></i>
                 {% endif %}
+
                 {% elif place.get_congestion_avg == 2 %}
                 {% if place.category.id == 1 %}
                 <i class="text-smd yellow fas fa-umbrella-beach"></i>
+                {% elif place.category.id == 2 %}
+                <i class="text-smd yellow fas fa-tree"></i>
+                {% elif place.category.id == 3 %}
+                <i class="text-smd yellow fas fa-vihara"></i>
                 {% else %}
-                <i class="text-smd yellow fas fa-map-marker"></i>
+                <i class="text-smd yellow fas fa-video"></i>
                 {% endif %}
+
                 {% else %}
                 {% if place.category.id == 1 %}
                 <i class="text-smd green fas fa-umbrella-beach"></i>
+                {% elif place.category.id == 2 %}
+                <i class="text-smd green fas fa-tree"></i>
+                {% elif place.category.id == 3 %}
+                <i class="text-smd green fas fa-vihara"></i>
                 {% else %}
-                <i class="text-smd green fas fa-map-marker"></i>
+                <i class="text-smd green fas fa-video"></i>
                 {% endif %}
                 {% endif %}
                 <p class="arrow-box">{{place.name}}</p>
@@ -44,16 +74,16 @@
         </div>
         <div class="color-info">
             <div class="light">
-                <i class="green fas fa-people-arrows"></i>
-                쾌적
+                <i class="text-smd green fas fa-people-arrows"></i>
+                <span class="white pl">쾌적</span>
             </div>
             <div class="light">
-                <i class="yellow fas fa-people-arrows"></i>
-                보통
+                <i class="text-smd yellow fas fa-people-arrows"></i>
+                <span class="white pl">보통</span>
             </div>
             <div class="light">
-                <i class="red fas fa-people-arrows"></i>
-                혼잡
+                <i class="text-smd red fas fa-people-arrows"></i>
+                <span class="white pl">혼잡</span>
             </div>
         </div>
         <div class="congestion-log-title">
@@ -64,7 +94,7 @@
         <div class="left-side">
             {% for congestion in congestions %}
             <div class="log">
-                <div class="text-bold congestion-place">{{ congestion.place }}에서 </div>
+                <div class="white text-bold congestion-place">{{ congestion.place }}에서 </div>
                 <div>
                     {% if congestion.value == 3 %}
                     <i class="text-mid red fas fa-people-arrows"></i>
@@ -80,7 +110,6 @@
         </div>
         <div class="right-side">
         </div>
-        <div class="scroll-guide">스크롤 해보세요</div>
     </div>
 </div>
 
@@ -122,7 +151,7 @@
                         {% if congestion.value == 3 %}
                         <div class="light">
                             <div class="light-on">
-                                <i class="fas fa-circle" style="color: red;"></i>
+                                <i class="fas fa-street-view" style="color: red;"></i>
                                 <span class="light-on-text">혼잡</span>
                             </div>
                             <span class="timeago">{{ congestion.time_since_created }}</span>
@@ -130,7 +159,7 @@
                         {% elif congestion.value == 2 %}
                         <div class="light">
                             <div class="light-on">
-                                <i class="fas fa-circle" style="color: yellow;"></i>
+                                <i class="fas fa-street-view" style="color: yellow;"></i>
                                 <span class="light-on-text">보통</span>
                             </div>
                             <span class="timeago">{{ congestion.time_since_created }}</span>
@@ -138,7 +167,7 @@
                         {% else %}
                         <div class="light">
                             <div class="light-on">
-                                <i class="fas fa-circle" style="color: green;"></i>
+                                <i class="fas fa-street-view" style="color: green;"></i>
                                 <span class="light-on-text">쾌적</span>
                             </div>
                             <span class="timeago">{{ congestion.time_since_created }}</span>
@@ -173,10 +202,12 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">닫 기</button>
-                <a type="button" href="{% url 'place:place-detail' place.id %}"class="btn btn-secondary" style="color: white">상세 보기</a>
+                <a type="button" href="{% url 'place:place-detail' place.id %}" class="btn btn-secondary"
+                    style="color: white">상세 보기</a>
             </div>
         </div>
     </div>
 </div>
 {% endfor %}
+<script src="{% static 'js/main.js' %}"></script>
 {% endblock %}

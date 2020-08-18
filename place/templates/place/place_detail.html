@@ -1,21 +1,142 @@
+
+
 {% extends 'base.html' %}
-
 {% block content %}
-    <div class="detail-image">
-        <img src="http://localhost:8000/media/{{ place.image }}" alt="">
-    </div>
-    <div>
-        {{ place.name }}
-    </div>
-    <div>
-        {{ place.description }}
-    </div>
-    <div>
-        {{ place.address }}
-    </div>
-    <div>
-        {{ place.website }}
-    </div>
 
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet"> -->
+
+  <style>
+    @import url(https://fonts.googleapis.com/css2?family=Jua&display=swap);
+    @import url(https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap);
+    @import url(https://fontawesome.com/icons/instagram?style=brands);
+    @import url(https://fontawesome.com/icons/home?style=solid);
+
+    .title {
+      font-family: 'Jua', sans-serif;
+      color: black;
+      font-size: 25px;
+      text-align: center;
+      background-color: #F98D52;
+      background-size: 100px 100px;
+      margin: 0;
+      padding: 10px 0px 10px 0px;
+      /* font-size: 0.7rem;   */
+      border-radius: 10px 10px 0px 0px / 10px 10px 0px 0px;
+
+    }
+
+    .image {
+      margin: 0;
+    }
+
+    .borderr{
+      padding-left : 20px;
+      font-size : 16px;
+      padding-right : 20px;
+      padding-top : 20px;
+      font-family: 'Do Hyeon', sans-serif;
+      background-color : #F2D691;
+      border-top: 10px solid #F9BC9A;
+      border-bottom: 10px solid #F9BC9A;
+    }
+
+    .detail{
+      padding-left : 20px;
+      font-size : 16px;
+      padding-right : 20px;
+      padding-top : 20px;
+      font-family: 'Do Hyeon', sans-serif;
+      background-color : #F7F1C8;
+      border-bottom: 10px solid #F9BC9A;
+      border-radius: 0px 0px 10px 10px / 0px 0px 10px 10px;
+
+    }
+
+    .insta{
+      font-size : 1.2rem;
+      color : #E80BB0;
+      padding-left : 60px;
+    }
+
+    .ifont{
+      font-size : 16px;
+
+    }
+
+    .home{
+      color : #D292F4;
+      padding-left : 65px;
+    }
+
+
+
+  </style>
+</head>
+
+<body>
+  <div>
+      <p class="title"> {{ place.name }} </p>
+  </div>
+
+  <div class="detail-image">
+    <img src="http://localhost:8000/media/{{ place.image }}" alt="">
+  </div>
+
+
+ <div class = "borderr" >
+    <p>
+      {{ place.address }}
+    </p>
+
+
+    <p>
+      {{ place.phone_number }}
+    </p>
+
+    <p>
+      {{place.weekend}}
+    </p>
+
+    <p>
+      {{ place.open_at}} {{place.closed_at}}
+    </p>
+
+    <p>
+      {{place.fee}}
+    </p>
+
+    <!-- <p> -->
+      <!-- {{place.website}} -->
+    <!-- </p> -->
+
+    <p>
+        <a type="button" href = "{{place.website}}" class = "btn btn - secondary" style="color:black">
+        <i class="home fas fa-home"></i>
+        <i class = "ifont">홈페이지 바로가기</i>
+        </a>
+    </p>
+
+    <p>
+        <a type="button" href="http://www.naver.com/{{place.name}}" class="btn" style="color:black">
+        <i class="insta fab fa-instagram"></i>
+        <i class = "ifont">인스타그램 바로가기</i>
+        </a>
+    </p>
+  </div>
+
+  <div class = "detail" >
+    <p>
+    {{ place.description }}
+    </p>
+  </div>
+
+
+</body>
+
+</html>
 
 {% endblock %}

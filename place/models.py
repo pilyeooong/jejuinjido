@@ -33,6 +33,12 @@ class Place(TimeStampedModel):
     image = models.ImageField(upload_to='place/')
     lat = models.FloatField()
     lng = models.FloatField()
+    # 추가 부분
+    open_at = models.TimeField(null=True)
+    closed_at = models.TimeField(null=True)
+    fee = models.IntegerField(null=True)
+    weekend = models.CharField(max_length=30, null=True)
+    hashtag = models.CharField(max_length=30, null=True)
 
     class Meta:
         ordering = ['-id']
