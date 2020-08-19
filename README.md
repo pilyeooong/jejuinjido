@@ -45,7 +45,7 @@
 - [WoongStar](https://github.com/Woongstar)
 - [yejin00](https://github.com/yejin00)
 - [Mike Dohyun Lim](https://github.com/mikeylim)
-- kj95287190
+- [kjin41](https://github.com/kjin41)
 
 
 ## **Contact**
