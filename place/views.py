@@ -1,7 +1,6 @@
 import datetime
 
 from bs4 import BeautifulSoup
-from selenium import webdriver
 from urllib import parse
 
 from django.shortcuts import render, get_object_or_404, redirect
