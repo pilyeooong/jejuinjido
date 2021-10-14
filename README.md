@@ -38,7 +38,7 @@
  1. git clone https://github.com/PilYeooong/jejuinjido
  2. python3 -m venv **'Your virtual env'**
 	 - source **'Your virtual env'**/bin/activate (Mac OS)
- 3. pip install -r requirements.txt  
+ 3. pip3 install -r requirements.txt  
  4. python manage.py migrate
  5. python manage.py runserver
 
